@@ -1,51 +1,32 @@
 class LoanApplicationsController < ApplicationController
-  before_action :set_loan_application, only: [:show, :update, :destroy]
+  # before_action :authenticate_user!
+  # before_action :require_field_credit_officer, only: [:create :approve_loan, :reject_loan]
 
-  # GET /loan_applications
   def index
-    @loan_applications = LoanApplication.all
-
-    render json: @loan_applications
+    loan_apps = LoanApplication.where(field_credit_officer_id: session[:id])
+    render json: loan_apps
   end
 
-  # GET /loan_applications/1
-  def show
-    render json: @loan_application
-  end
-
-  # POST /loan_applications
   def create
-    @loan_application = LoanApplication.new(loan_application_params)
-
-    if @loan_application.save
-      render json: @loan_application, status: :created, location: @loan_application
+    loan_app = LoanApplication.create(loan_applications_params)
+    
+    if loan_app.valid?
+      loan_app.save
+      render json: loan_app, status: :created
     else
-      render json: @loan_application.errors, status: :unprocessable_entity
+      render json: { errors: loan_app.errors.full_messages }, status: :unprocessable_entity
     end
-  end
-
-  # PATCH/PUT /loan_applications/1
-  def update
-    if @loan_application.update(loan_application_params)
-      render json: @loan_application
-    else
-      render json: @loan_application.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /loan_applications/1
-  def destroy
-    @loan_application.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_loan_application
-      @loan_application = LoanApplication.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def loan_application_params
-      params.require(:loan_application).permit(:customer_name, :customer_phone, :business_name, :business_address, :business_history)
+  def require_field_credit_officer
+    unless current_user && current_user.field_credit_officer?
+      render json: { error: "Access denied" }, status: :forbidden
     end
+  end
+
+  def loan_applications_params
+    params.permit(:customer_name, :customer_phone, :business_name, :business_address, :business_history, :field_credit_officer_id)
+  end
 end
