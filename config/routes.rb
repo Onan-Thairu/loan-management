@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :receipts, only: [:index]
   resources :loan_disbursements, only: [:index]
   resources :loans, only: [:index]
-  resources :loan_applications, only: [:index, :create]
+  resources :loan_applications, only: [:index, :create, :update]
   resources :users, only: [:index, :create]
 
   # Check if signed in
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   # Loan Applications
-  get "/loan_applications/all", to: "loan_applications#all"
+  get "/loan_applications/pending", to: "loan_applications#pending"
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

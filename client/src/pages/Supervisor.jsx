@@ -4,13 +4,49 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function SupervisorLoanApprovalPage() {
-  const [loanApplications, setLoanApplications] = useState([]);
+  const [ loanApplications, setLoanApplications ] = useState([]);
+  const [ displayMessage, setDisplayMessage ] = useState("")
 
   useEffect(() => {
-    fetch("/loan_applications/all")
+    fetch("/loan_applications/pending")
       .then((res) => res.json())
       .then((data) => setLoanApplications(data));
   }, []);
+
+  const handleApprove = (application => {
+    const requestOptions = {
+      method: "PUT",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ ...application, status: 1 })
+    }
+    fetch(`/loan_applications/${application.id}`, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        let loan_apps = loanApplications.filter(loanApp => loanApp.id !== application.id )
+        setLoanApplications(loan_apps)
+        setDisplayMessage(data.message)
+      })
+  })
+
+
+  const handleRejected = (application => {
+    const requestOptions = {
+      method: "PUT",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ ...application, status: 2 })
+    }
+    fetch(`/loan_applications/${application.id}`, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        let loan_apps = loanApplications.filter(loanApp => loanApp.id !== application.id )
+        setLoanApplications(loan_apps)
+        setDisplayMessage(data.message)
+
+        setTimeout(() => {
+          setDisplayMessage("")
+        }, 2000);
+      })
+  })
 
   return (
     <>
@@ -23,6 +59,12 @@ function SupervisorLoanApprovalPage() {
         <NavLink to={"/customer"}>Back</NavLink>
       </div>
     </Hero>
+    {
+      displayMessage.length > 0 ? 
+        <P>{displayMessage}</P> 
+      : 
+        null
+    }
     <Table>
       <thead>
         <tr>
@@ -42,8 +84,8 @@ function SupervisorLoanApprovalPage() {
             <TableData>{loanApplication.business_name}</TableData>
             <TableData>{loanApplication.business_address}</TableData>
             <TableData>{loanApplication.business_history}</TableData>
-            <button>Approve</button>
-            <button>Reject</button>
+            <Button onClick={ () => handleApprove(loanApplication)} >Approve</Button>
+            <Button onClick={ () => handleRejected(loanApplication)} >Reject</Button>
             {/* <TableData>{loanApplication.field_credit_officer_id}</TableData> */}
           </TableRow>
         ))}
@@ -93,6 +135,19 @@ const Table = styled.table`
   }
 `;
 
+const P = styled.p`
+position: fixed;
+top: 0;
+left: 50%;
+transform: translate(-50%, 40%);
+background-color: #dff0d8;
+color: #3c763d;
+border: 1px solid #d6e9c6;
+padding: 15px;
+border-radius: 5px;
+font-size: 18px;
+`
+
 const TableHeader = styled.th`
   padding: 0.75rem;
   text-align: left;
@@ -112,6 +167,20 @@ const TableData = styled.td`
   text-align: left;
   color: #333;
   border-bottom: 1px solid #ddd;
+`;
+
+const Button = styled.button`
+  padding: 8px 12px;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+  background-color: #004c3f;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: #007f6e;
+  }
 `;
 
 export default SupervisorLoanApprovalPage;

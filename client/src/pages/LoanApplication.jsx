@@ -21,7 +21,15 @@ function LoanApplicationForm({ currentUser }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ customer_name, customer_phone, business_name, business_address, business_history, field_credit_officer_id: currentUser.id, status: 0  })
+      body: JSON.stringify({ 
+        customer_name, 
+        customer_phone, 
+        business_name, 
+        business_address, 
+        business_history, 
+        field_credit_officer_id: 
+        currentUser.id 
+      })
     })
     .then((res) => {
       if (res.ok) {

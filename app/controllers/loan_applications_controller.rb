@@ -1,16 +1,28 @@
 class LoanApplicationsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :loan_application_not_found
   # before_action :authenticate_user!
   before_action :require_field_credit_officer, only: [:create]
-  before_action :require_supervisor, only: [:all]
-
-  def all
-    loan_app = LoanApplication.all
-    render json: loan_app
-  end
+  before_action :require_supervisor, only: [:pending]
 
   def index
     loan_apps = LoanApplication.where(field_credit_officer_id: session[:id])
-    render json: loan_apps
+    render json: loan_apps, status: :ok
+  end
+
+  def pending
+    loan_app = LoanApplication.where(status: :pending)
+    render json: loan_app, status: :ok
+  end
+
+  def update
+    loan_app = LoanApplication.find(params[:id])
+
+    if loan_app.update(loan_applications_params)
+      render json: { message: "Loan Application Updated" }, status: :ok
+    else
+      render json: { errors: loan_app.errors.full_messages }, status: :unprocessable_entity
+    end
+
   end
 
   def create
@@ -36,6 +48,10 @@ class LoanApplicationsController < ApplicationController
     unless current_user && current_user.supervisor?
       render json: { error: "Access denied" }, status: :forbidden
     end
+  end
+
+  def loan_application_not_found
+    render json: { error: "Application Not Found" }, status: :not_found
   end
 
   def loan_applications_params
