@@ -7,7 +7,7 @@ class LoanApplicationsController < ApplicationController
     loan_app = LoanApplication.all
     render json: loan_app
   end
-  
+
   def index
     loan_apps = LoanApplication.where(field_credit_officer_id: session[:id])
     render json: loan_apps
@@ -39,6 +39,6 @@ class LoanApplicationsController < ApplicationController
   end
 
   def loan_applications_params
-    params.permit(:customer_name, :customer_phone, :business_name, :business_address, :business_history, :field_credit_officer_id)
+    params.permit(:customer_name, :customer_phone, :business_name, :business_address, :business_history, :field_credit_officer_id, :status)
   end
 end
