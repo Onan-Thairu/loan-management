@@ -1,7 +1,13 @@
 class LoanApplicationsController < ApplicationController
   # before_action :authenticate_user!
-  # before_action :require_field_credit_officer, only: [:create :approve_loan, :reject_loan]
+  before_action :require_field_credit_officer, only: [:create]
+  before_action :require_supervisor, only: [:all]
 
+  def all
+    loan_app = LoanApplication.all
+    render json: loan_app
+  end
+  
   def index
     loan_apps = LoanApplication.where(field_credit_officer_id: session[:id])
     render json: loan_apps
@@ -22,6 +28,12 @@ class LoanApplicationsController < ApplicationController
 
   def require_field_credit_officer
     unless current_user && current_user.field_credit_officer?
+      render json: { error: "Access denied" }, status: :forbidden
+    end
+  end
+
+  def require_supervisor
+    unless current_user && current_user.supervisor?
       render json: { error: "Access denied" }, status: :forbidden
     end
   end

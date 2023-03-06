@@ -19,4 +19,7 @@ Rails.application.routes.draw do
 
   # Log out
   delete "/logout", to: "sessions#destroy"
+
+  # Loan Applications
+  get "/loan_applications/all", to: "loan_applications#all"
 end

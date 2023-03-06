@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import { Link } from "react-router-dom";
 
-function CreditOfficerLoanApplications() {
+function SupervisorLoanApprovalPage() {
   const [loanApplications, setLoanApplications] = useState([]);
 
   useEffect(() => {
-    fetch("/loan_applications")
+    fetch("/loan_applications/all")
       .then((res) => res.json())
       .then((data) => setLoanApplications(data));
   }, []);
@@ -17,7 +17,7 @@ function CreditOfficerLoanApplications() {
     {/* <Header/> */}
     <Hero>
       <div>
-        <h2>Your Loan Applications</h2>
+        <h2>Loan Applications</h2>
       </div>
       <div>
         <NavLink to={"/customer"}>Back</NavLink>
@@ -42,6 +42,8 @@ function CreditOfficerLoanApplications() {
             <TableData>{loanApplication.business_name}</TableData>
             <TableData>{loanApplication.business_address}</TableData>
             <TableData>{loanApplication.business_history}</TableData>
+            <button>Approve</button>
+            <button>Reject</button>
             {/* <TableData>{loanApplication.field_credit_officer_id}</TableData> */}
           </TableRow>
         ))}
@@ -112,4 +114,4 @@ const TableData = styled.td`
   border-bottom: 1px solid #ddd;
 `;
 
-export default CreditOfficerLoanApplications;
+export default SupervisorLoanApprovalPage;
