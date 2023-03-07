@@ -78,16 +78,16 @@ cursor: pointer;
 const Table = styled.table`
   border-collapse: collapse;
   margin: 2rem auto;
-  width: 100%;
-  max-width: 800px;
+  width: 80vw;
   font-size: 0.8rem;
-  line-height: 1.5;
+  line-height: 1rem;
   padding-left: .5rem;
   padding-right: .5rem;
 
 
   @media (min-width: 768px) {
-    font-size: 1rem;
+    font-size: .8rem;
+    width: 90vw;
   }
 `;
 

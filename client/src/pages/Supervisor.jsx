@@ -25,6 +25,10 @@ function SupervisorLoanApprovalPage() {
         let loan_apps = loanApplications.filter(loanApp => loanApp.id !== application.id )
         setLoanApplications(loan_apps)
         setDisplayMessage(data.message)
+
+        setTimeout(() => {
+          setDisplayMessage("")
+        }, 2000);
       })
   })
 
@@ -84,8 +88,10 @@ function SupervisorLoanApprovalPage() {
             <TableData>{loanApplication.business_name}</TableData>
             <TableData>{loanApplication.business_address}</TableData>
             <TableData>{loanApplication.business_history}</TableData>
-            <Button onClick={ () => handleApprove(loanApplication)} >Approve</Button>
-            <Button onClick={ () => handleRejected(loanApplication)} >Reject</Button>
+            <BtnDiv>
+              <Button onClick={ () => handleApprove(loanApplication)} >Approve</Button>
+              <Button onClick={ () => handleRejected(loanApplication)} >Reject</Button>
+            </BtnDiv>
             {/* <TableData>{loanApplication.field_credit_officer_id}</TableData> */}
           </TableRow>
         ))}
@@ -122,16 +128,17 @@ cursor: pointer;
 const Table = styled.table`
   border-collapse: collapse;
   margin: 2rem auto;
-  width: 100%;
-  max-width: 800px;
-  font-size: 0.8rem;
-  line-height: 1.5;
+  width: 90vw;
+  font-size: 0.6rem;
+  line-height: .8rem;
   padding-left: .5rem;
   padding-right: .5rem;
 
 
   @media (min-width: 768px) {
-    font-size: 1rem;
+    font-size: .8rem;
+    width: 90vw;
+    line-height: 1rem;
   }
 `;
 
@@ -169,17 +176,30 @@ const TableData = styled.td`
   border-bottom: 1px solid #ddd;
 `;
 
+const BtnDiv = styled.div`
+  display: flex;
+  text-align: center;
+  gap: .5rem;
+  padding: 0.75rem;
+`
+
 const Button = styled.button`
-  padding: 8px 12px;
-  font-size: 10px;
+  padding: 5px 9px;
+  font-size: 7px;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 5px;
   background-color: #004c3f;
   color: #ffffff;
   border: none;
   cursor: pointer;
   &:hover {
     background-color: #007f6e;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
   }
 `;
 
