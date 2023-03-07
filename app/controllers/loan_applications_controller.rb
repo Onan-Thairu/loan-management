@@ -55,6 +55,6 @@ class LoanApplicationsController < ApplicationController
   end
 
   def loan_applications_params
-    params.permit(:customer_name, :customer_phone, :business_name, :business_address, :business_history, :field_credit_officer_id, :status)
+    params.permit(:customer_name, :customer_phone, :business_name, :business_address, :business_history, :field_credit_officer_id, :loan_amount, :interest_rate, :status)
   end
 end

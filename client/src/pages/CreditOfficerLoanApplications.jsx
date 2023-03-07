@@ -29,9 +29,10 @@ function CreditOfficerLoanApplications() {
           <TableHeader>Customer Name</TableHeader>
           <TableHeader>Customer Phone</TableHeader>
           <TableHeader>Business Name</TableHeader>
-          <TableHeader>Business Address</TableHeader>
-          <TableHeader>Business History</TableHeader>
-          {/* <TableHeader>Credit Officer</TableHeader> */}
+          <TableHeader>Address</TableHeader>
+          <TableHeader>History</TableHeader>
+          <TableHeader>Amount</TableHeader>
+          <TableHeader>Interest</TableHeader>
         </tr>
       </thead>
       <tbody>
@@ -42,7 +43,8 @@ function CreditOfficerLoanApplications() {
             <TableData>{loanApplication.business_name}</TableData>
             <TableData>{loanApplication.business_address}</TableData>
             <TableData>{loanApplication.business_history}</TableData>
-            {/* <TableData>{loanApplication.field_credit_officer_id}</TableData> */}
+            <TableData>{loanApplication.loan_amount}</TableData>
+            <TableData>{loanApplication.interest_rate}</TableData>
           </TableRow>
         ))}
       </tbody>
@@ -60,6 +62,7 @@ const Hero = styled.div`
   
   h2{
     color: #004c3f;
+    font-size: .8rem;
   }
 `
 
@@ -78,16 +81,14 @@ cursor: pointer;
 const Table = styled.table`
   border-collapse: collapse;
   margin: 2rem auto;
-  width: 80vw;
-  font-size: 0.8rem;
-  line-height: 1rem;
-  padding-left: .5rem;
-  padding-right: .5rem;
-
+  width: 90vw;
+  font-size: 0.5rem;
+  line-height: .6rem;
 
   @media (min-width: 768px) {
-    font-size: .8rem;
+    font-size: .6rem;
     width: 90vw;
+    line-height: .1rem;
   }
 `;
 
@@ -106,7 +107,7 @@ const TableRow = styled.tr`
 `;
 
 const TableData = styled.td`
-  padding: 0.75rem;
+  padding: 0.6rem;
   text-align: left;
   color: #333;
   border-bottom: 1px solid #ddd;

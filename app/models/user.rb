@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  enum user_role: [:field_credit_officer, :supervisor, :loan_applicant, :office_admin]
+  enum user_role: [:field_credit_officer, :supervisor, :loan_applicant, :office_admin], _default: :loan_applicant
 
   has_secure_password
 

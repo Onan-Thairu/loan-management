@@ -9,6 +9,8 @@ function LoanApplicationForm({ currentUser }) {
   const [business_name, setBusinessName] = useState("")
   const [business_address, setBusinessAddress] = useState("")
   const [business_history, setBusinessHistory] = useState("")
+  const [loan_amount, setLoanAmount] = useState("")
+  
   const [errors, setErrors] = useState([])
 
   let navigate = useNavigate()
@@ -26,9 +28,10 @@ function LoanApplicationForm({ currentUser }) {
         customer_phone, 
         business_name, 
         business_address, 
-        business_history, 
-        field_credit_officer_id: 
-        currentUser.id 
+        business_history,
+        loan_amount: parseInt(loan_amount),
+        interest_rate: 3,
+        field_credit_officer_id: currentUser.id
       })
     })
     .then((res) => {
@@ -67,6 +70,11 @@ function LoanApplicationForm({ currentUser }) {
           <Label htmlFor="business_history">Business History</Label>
           <TextArea id="business_history" name="business_history" onChange={(e) => setBusinessHistory(e.target.value)} ></TextArea>
         </FormField>
+        <FormField>
+          <Label htmlFor="loan_amount">Loan Amount</Label>
+          <Input type="text" id="loan_amount" placeholder="Minimum - Ksh.7000" name="loan_amount" onChange={(e) => setLoanAmount(e.target.value)} />
+        </FormField>
+
         <FormButton type="submit" onClick={ handleLoanApplication } >Submit</FormButton>
       </Form>
     </Container>
@@ -80,7 +88,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  margin-top: 5rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
 `;
 
 const Form = styled.form`
@@ -93,11 +102,11 @@ const Form = styled.form`
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   max-width: 500px;
-  width: 100%;
+  width: 80vw;
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 1rem;
   margin-bottom: 2rem;
   font-weight: bold;
   background-color: #fff;
@@ -110,42 +119,42 @@ const FormField = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  margin-bottom: 1.5rem;
+  margin-bottom: .8rem;
   background-color: #fff;
 `;
 
 const Label = styled.label`
-  font-size: 1rem;
+  font-size: .6rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
   background-color: #fff;
 `;
 
 const Input = styled.input`
-  padding: 0.5rem;
+  padding: 0.4rem;
   border-radius: 5px;
   border: none;
   width: 100%;
-  font-size: 1rem;
+  font-size: .6rem;
   background-color: #DCDCDC;
   outline: none;
 `;
 
 const TextArea = styled.textarea`
-  padding: 0.5rem;
+  padding: 0.3rem;
   border-radius: 5px;
   border: none;
   width: 100%;
-  font-size: 1rem;
+  font-size: .6rem;
   background-color: #DCDCDC;
   outline: none;
 `;
 
 const FormButton = styled.button`
-  padding: 12px 24px;
-  font-size: 1.1rem;
+  padding: 6px 18px;
+  font-size: .8rem;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: #004c3f;
   color: #ffffff;
   border: none;

@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 // import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import { BsCheck } from "react-icons/bs"
+import { RxCross2 } from "react-icons/rx"
 
 function SupervisorLoanApprovalPage() {
   const [ loanApplications, setLoanApplications ] = useState([]);
@@ -77,7 +79,8 @@ function SupervisorLoanApprovalPage() {
           <TableHeader>Business Name</TableHeader>
           <TableHeader>Business Address</TableHeader>
           <TableHeader>Business History</TableHeader>
-          {/* <TableHeader>Credit Officer</TableHeader> */}
+          <TableHeader>Amount</TableHeader>
+          <TableHeader>Interest</TableHeader>
         </tr>
       </thead>
       <tbody>
@@ -88,9 +91,11 @@ function SupervisorLoanApprovalPage() {
             <TableData>{loanApplication.business_name}</TableData>
             <TableData>{loanApplication.business_address}</TableData>
             <TableData>{loanApplication.business_history}</TableData>
+            <TableData>{loanApplication.loan_amount}</TableData>
+            <TableData>{loanApplication.interest_rate}</TableData>
             <BtnDiv>
-              <Button onClick={ () => handleApprove(loanApplication)} >Approve</Button>
-              <Button onClick={ () => handleRejected(loanApplication)} >Reject</Button>
+              <BsCheck onClick={ () => handleApprove(loanApplication)} size={'1.6em'} color="#004c3f" cursor="pointer" />
+              <RxCross2 onClick={ () => handleRejected(loanApplication)} size={'1.5em'} color="#ff1744" cursor="pointer" />
             </BtnDiv>
             {/* <TableData>{loanApplication.field_credit_officer_id}</TableData> */}
           </TableRow>
@@ -130,7 +135,7 @@ const Table = styled.table`
   border-collapse: collapse;
   margin: 2rem auto;
   width: 90vw;
-  font-size: 0.5rem;
+  font-size: 0.6rem;
   line-height: .7rem;
   padding-left: .4rem;
   padding-right: .4rem;
