@@ -26,12 +26,12 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: .8rem;
   background-color: #004c3f;
 `;
 
 const Logo = styled.h1`
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #fff;
   background-color: #004c3f;
 `;
@@ -47,7 +47,7 @@ const Links = styled.ul`
 `;
 
 const NavLink = styled(Link)`
-font-size: 1rem;
+font-size: .6rem;
 color: #fff;
 margin-left: 2rem;
 text-decoration: none;

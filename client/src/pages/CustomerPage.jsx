@@ -39,7 +39,7 @@ const Container = styled.div`
 `;
 
 const WelcomeMessage = styled.h1`
-  font-size: 3rem;
+  font-size: 2rem;
   margin-bottom: 2rem;
   text-align: center;
   color: #004c3f;
@@ -71,6 +71,7 @@ const RoleLinks = styled.ul`
     padding: 0.5rem 1rem;
     border: 1px solid #004c3f;
     border-radius: 3px;
+    font-size: .8rem;
     text-align: center;
     width: 100%;
     max-width: 20rem;

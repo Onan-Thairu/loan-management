@@ -21,14 +21,14 @@ const PageContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 48px;
-  margin-bottom: 32px;
+  font-size: 2rem;
+  margin-bottom: 2rem;
   color: #004c3f;
 `;
 
 const Button = styled.button`
-  padding: 12px 24px;
-  font-size: 24px;
+  padding: 10px 20px;
+  font-size: 1rem;
   font-weight: bold;
   border-radius: 8px;
   background-color: #004c3f;

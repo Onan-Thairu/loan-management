@@ -76,11 +76,11 @@ const Form = styled.form`
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   max-width: 500px;
-  width: 100%;
+  width: 90vw;
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: .8rem;
   margin-bottom: 2rem;
   font-weight: bold;
   background-color: #fff;
@@ -90,15 +90,16 @@ const Title = styled.h1`
 const Input = styled.input`
   border: 1px solid #004c3f;
   border-radius: 3px;
-  padding: 0.5rem;
+  padding: 0.4rem;
   margin-bottom: 1rem;
   width: 100%;
   outline: none;
+  font-size: .6rem;
 `;
 
 const Button = styled.button`
-  padding: 12px 24px;
-  font-size: 1.1rem;
+  padding: 6px 18px;
+  font-size: .8rem;
   font-weight: bold;
   border-radius: 8px;
   background-color: #004c3f;
@@ -113,6 +114,7 @@ const Button = styled.button`
 
 const P = styled.p`
  background-color: #fff;
+ font-size: .6rem;
  `
 
 export default Register

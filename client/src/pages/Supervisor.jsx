@@ -110,11 +110,12 @@ const Hero = styled.div`
   
   h2{
     color: #004c3f;
+    font-size: 1rem;
   }
 `
 
 const NavLink = styled(Link)`
-font-size: 1rem;
+font-size: .6rem;
 color: #004c3f;
 margin-left: 2rem;
 text-decoration: none;
@@ -129,16 +130,16 @@ const Table = styled.table`
   border-collapse: collapse;
   margin: 2rem auto;
   width: 90vw;
-  font-size: 0.6rem;
-  line-height: .8rem;
-  padding-left: .5rem;
-  padding-right: .5rem;
+  font-size: 0.5rem;
+  line-height: .7rem;
+  padding-left: .4rem;
+  padding-right: .4rem;
 
 
   @media (min-width: 768px) {
-    font-size: .8rem;
+    font-size: .6rem;
     width: 90vw;
-    line-height: 1rem;
+    line-height: .8rem;
   }
 `;
 
@@ -150,9 +151,9 @@ transform: translate(-50%, 40%);
 background-color: #dff0d8;
 color: #3c763d;
 border: 1px solid #d6e9c6;
-padding: 15px;
+padding: 10px;
 border-radius: 5px;
-font-size: 18px;
+font-size: 10px;
 `
 
 const TableHeader = styled.th`
@@ -197,9 +198,9 @@ const Button = styled.button`
   }
 
   @media (min-width: 768px) {
-    font-size: 10px;
-    padding: 8px 12px;
-    border-radius: 8px;
+    font-size: .4rem;
+    padding: 6px 10px;
+    border-radius: 6px;
   }
 `;
 

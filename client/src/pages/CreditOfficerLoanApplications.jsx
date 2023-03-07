@@ -64,7 +64,7 @@ const Hero = styled.div`
 `
 
 const NavLink = styled(Link)`
-font-size: 1rem;
+font-size: .6rem;
 color: #004c3f;
 margin-left: 2rem;
 text-decoration: none;
