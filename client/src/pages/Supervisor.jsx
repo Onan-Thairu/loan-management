@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { BsCheck } from "react-icons/bs"
 import { RxCross2 } from "react-icons/rx"
 
-function SupervisorLoanApprovalPage() {
+function SupervisorLoanApprovalPage({ currentUser }) {
   const [ loanApplications, setLoanApplications ] = useState([]);
   const [ displayMessage, setDisplayMessage ] = useState("")
 
@@ -32,6 +32,21 @@ function SupervisorLoanApprovalPage() {
           setDisplayMessage("")
         }, 2000);
       })
+
+    const requestOptions2 = {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        loan_application_id: application.id, 
+        loan_amount: application.loan_amount,
+        interest_rate: application.interest_rate,
+        approved_by: currentUser.username,
+        approval_date: new Date().toLocaleDateString()
+       })
+    }
+    fetch(`/loans`, requestOptions2)
+      .then(response => response.json())
+      .then(data => console.log(data))
   })
 
 
@@ -94,7 +109,7 @@ function SupervisorLoanApprovalPage() {
             <TableData>{loanApplication.loan_amount}</TableData>
             <TableData>{loanApplication.interest_rate}</TableData>
             <BtnDiv>
-              <BsCheck onClick={ () => handleApprove(loanApplication)} size={'1.6em'} color="#004c3f" cursor="pointer" />
+              <BsCheck onClick={ () => handleApprove(loanApplication)} size={'1.6em'} color="#00e676" cursor="pointer" />
               <RxCross2 onClick={ () => handleRejected(loanApplication)} size={'1.5em'} color="#ff1744" cursor="pointer" />
             </BtnDiv>
             {/* <TableData>{loanApplication.field_credit_officer_id}</TableData> */}

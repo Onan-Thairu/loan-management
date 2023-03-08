@@ -1,10 +1,22 @@
 class LoansController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :require_supervisor, only: [:approve_loan, :reject_loan]
+  before_action :require_supervisor, only: [:create, :reject_loan]
 
-  def approve_loan
-    # code to approve loan
+  def index
+    loans = Loan.all
+    render json: loans, status: :ok
+  end
+
+  def create
+    new_loan = Loan.create(loan_params)
+
+    if new_loan.valid?
+      new_loan.save
+      render json: new_loan, status: :created
+    else
+      render json: { errors: new_loan.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def reject_loan
@@ -21,6 +33,6 @@ class LoansController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def loan_params
-      params.permit(:loan_app_id, :loan_amount, :interest_rate, :approved_by, :approval_date)
+      params.permit(:loan_application_id, :loan_amount, :interest_rate, :approved_by, :approval_date)
     end
 end

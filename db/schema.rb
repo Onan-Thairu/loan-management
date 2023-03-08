@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_07_163827) do
+ActiveRecord::Schema.define(version: 2023_03_08_090625) do
 
   create_table "loan_applications", force: :cascade do |t|
     t.string "customer_name"
@@ -37,14 +37,14 @@ ActiveRecord::Schema.define(version: 2023_03_07_163827) do
   end
 
   create_table "loans", force: :cascade do |t|
-    t.integer "loan_app_id", null: false
     t.integer "loan_amount"
     t.float "interest_rate"
     t.string "approved_by"
     t.date "approval_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["loan_app_id"], name: "index_loans_on_loan_app_id"
+    t.integer "loan_application_id"
+    t.index ["loan_application_id"], name: "index_loans_on_loan_application_id"
   end
 
   create_table "receipts", force: :cascade do |t|
@@ -66,6 +66,5 @@ ActiveRecord::Schema.define(version: 2023_03_07_163827) do
 
   add_foreign_key "loan_applications", "users", column: "field_credit_officer_id"
   add_foreign_key "loan_disbursements", "loans"
-  add_foreign_key "loans", "loan_apps"
   add_foreign_key "receipts", "loan_apps"
 end
