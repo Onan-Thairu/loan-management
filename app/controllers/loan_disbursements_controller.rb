@@ -36,6 +36,6 @@ class LoanDisbursementsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def loan_disbursement_params
-      params.permit(:loan_id, :disbursement_date, :disbursement_amount)
+      params.permit(:loan_id, :disbursement_date, :disbursement_amount, :due_date)
     end
 end

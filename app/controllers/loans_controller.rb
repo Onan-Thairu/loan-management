@@ -21,7 +21,7 @@ class LoansController < ApplicationController
     end
   end
 
-  # PUT /loans
+  # PUT /loans/:id
   def update
     loan = Loan.find(params[:id])
 
@@ -44,6 +44,6 @@ class LoansController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def loan_params
-      params.permit(:loan_application_id, :loan_amount, :interest_rate, :approved_by, :approval_date)
+      params.permit(:loan_application_id, :loan_amount, :interest_rate, :approved_by, :approval_date, :status)
     end
 end

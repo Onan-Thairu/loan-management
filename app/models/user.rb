@@ -5,6 +5,6 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
-  has_many :loan_applications, through: :field_credit_officers
-  has_many :loans, foreign_key: "approved_by"
+  has_many :loan_applications, through: :field_credit_officers, dependent: :destroy
+  has_many :loans, foreign_key: "approved_by", dependent: :destroy
 end

@@ -3,6 +3,6 @@ class LoanApplication < ApplicationRecord
 
   validates :loan_amount, numericality: { greater_than_or_equal_to: 7000 }
 
-  has_one :loan
+  has_one :loan, dependent: :destroy
   belongs_to :field_credit_officer, class_name: "User"
 end

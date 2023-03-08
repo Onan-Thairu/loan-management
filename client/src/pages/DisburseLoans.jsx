@@ -33,20 +33,24 @@ function DisburseLoansPage({ currentUser }) {
         }, 2000);
       })
 
-    // const requestOptions2 = {
-    //   method: "POST",
-    //   headers: {'Content-Type': 'application/json'},
-    //   body: JSON.stringify({
-    //     loan_application_id: application.id, 
-    //     loan_amount: application.loan_amount,
-    //     interest_rate: application.interest_rate,
-    //     approved_by: currentUser.username,
-    //     approval_date: new Date().toLocaleDateString()
-    //    })
-    // }
-    // fetch(`/loans`, requestOptions2)
-    //   .then(response => response.json())
-    //   .then(data => console.log(data))
+      // Get date 2 months away
+      const currentDate = new Date()
+      const futureDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, currentDate.getDate())
+      const formattedDate = futureDate.toISOString().slice(0, 10)
+
+    const requestOptions2 = {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        loan_id: disbursedLoan.id, 
+        disbursement_amount: disbursedLoan.loan_amount,
+        disbursement_date: new Date().toLocaleDateString(),
+        due_date: formattedDate
+       })
+    }
+    fetch(`/loan_disbursements`, requestOptions2)
+      .then(response => response.json())
+      .then(data => console.log(data))
   })
 
 
