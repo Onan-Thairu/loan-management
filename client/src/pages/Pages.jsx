@@ -7,6 +7,7 @@ import CreditOfficerLoanApplications from "./CreditOfficerLoanApplications"
 import CustomerPage from "./CustomerPage"
 import SupervisorLoanApprovalPage from "./Supervisor"
 import DisburseLoansPage from "./DisburseLoans"
+import Disbursed from "./Disbursed"
 import Logout from "./Logout"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
@@ -33,7 +34,9 @@ function Pages() {
         <Route path="/apply" element={ <LoanApplicationForm currentUser={ currentUser } />}></Route>
         <Route path="/credit-officer-loans" element={ <CreditOfficerLoanApplications currentUser={ currentUser } />}></Route>
         <Route path="/supervisor" element={ <SupervisorLoanApprovalPage currentUser={ currentUser } />}></Route>
-        <Route path="/loan_disbursement" element={ <DisburseLoansPage currentUser={ currentUser } />}></Route>
+        <Route path="/loan_disbursements" element={ <DisburseLoansPage currentUser={ currentUser } />}></Route>
+        <Route path="/disbursed_loans" element={ <Disbursed />}></Route>
+
 
         <Route path="/logout" element={ <Logout setCurrentUser={setCurrentUser} /> } ></Route>
       </Routes>

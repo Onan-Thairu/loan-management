@@ -13,15 +13,17 @@ const CustomerPage = ({ currentUser }) => {
         <RoleNavigation>
           <RoleLinks>
             
+            {currentUser.user_role === "loan_applicant" ? <NavLink to="#">My Loans</NavLink> : null }
             {currentUser.user_role === "loan_applicant" ? <NavLink to="#">Make Payment</NavLink> : null }
-            {currentUser.user_role === "loan_applicant" ? <NavLink to="#">Approved Loans</NavLink> : null }
-
 
             {currentUser.user_role === "field_credit_officer" ? <NavLink to="/credit-officer-loans">Loan Applications</NavLink> : null }
             {currentUser.user_role === "field_credit_officer" ? <NavLink to="/apply">Create Loan Application</NavLink> : null }
 
             {currentUser.user_role === "supervisor" ? <NavLink to="/supervisor">Approve/Reject Loans</NavLink> : null }
-            {currentUser.user_role === "office_admin" ? <NavLink to="/loan_disbursement">Disburse Loans</NavLink> : null }
+
+            {currentUser.user_role === "office_admin" ? <NavLink to="/disbursed_loans">Disbursed Loans</NavLink> : null }
+            {currentUser.user_role === "office_admin" ? <NavLink to="/loan_disbursements">Disburse Approved Loans</NavLink> : null }
+
           </RoleLinks>
         </RoleNavigation>
       </Navigation>
