@@ -3,29 +3,29 @@ import { useEffect, useState } from "react";
 // import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import { BsCheck } from "react-icons/bs"
-import { RxCross2 } from "react-icons/rx"
+// import { RxCross2 } from "react-icons/rx"
 
-function SupervisorLoanApprovalPage({ currentUser }) {
-  const [ loanApplications, setLoanApplications ] = useState([]);
+function DisburseLoansPage({ currentUser }) {
+  const [ loans, setLoans ] = useState([]);
   const [ displayMessage, setDisplayMessage ] = useState("")
 
   useEffect(() => {
-    fetch("/loan_applications/pending")
+    fetch("/loans")
       .then((res) => res.json())
-      .then((data) => setLoanApplications(data));
+      .then((data) => setLoans(data));
   }, []);
 
-  const handleApprove = (application => {
+  const handleDisburse = (disbursedLoan => {
     const requestOptions = {
       method: "PUT",
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ ...application, status: 1 })
+      body: JSON.stringify({ ...disbursedLoan, status: 1 })
     }
-    fetch(`/loan_applications/${application.id}`, requestOptions)
+    fetch(`/loans/${disbursedLoan.id}`, requestOptions)
       .then(response => response.json())
       .then(data => {
-        let loan_apps = loanApplications.filter(loanApp => loanApp.id !== application.id )
-        setLoanApplications(loan_apps)
+        let newLoans = loans.filter(loan => loan.id !== disbursedLoan.id )
+        setLoans(newLoans)
         setDisplayMessage(data.message)
 
         setTimeout(() => {
@@ -33,48 +33,29 @@ function SupervisorLoanApprovalPage({ currentUser }) {
         }, 2000);
       })
 
-    const requestOptions2 = {
-      method: "POST",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        loan_application_id: application.id, 
-        loan_amount: application.loan_amount,
-        interest_rate: application.interest_rate,
-        approved_by: currentUser.username,
-        approval_date: new Date().toLocaleDateString()
-       })
-    }
-    fetch(`/loans`, requestOptions2)
-      .then(response => response.json())
-      // .then(data => console.log(data))
+    // const requestOptions2 = {
+    //   method: "POST",
+    //   headers: {'Content-Type': 'application/json'},
+    //   body: JSON.stringify({
+    //     loan_application_id: application.id, 
+    //     loan_amount: application.loan_amount,
+    //     interest_rate: application.interest_rate,
+    //     approved_by: currentUser.username,
+    //     approval_date: new Date().toLocaleDateString()
+    //    })
+    // }
+    // fetch(`/loans`, requestOptions2)
+    //   .then(response => response.json())
+    //   .then(data => console.log(data))
   })
 
-
-  const handleRejected = (application => {
-    const requestOptions = {
-      method: "PUT",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ ...application, status: 2 })
-    }
-    fetch(`/loan_applications/${application.id}`, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        let loan_apps = loanApplications.filter(loanApp => loanApp.id !== application.id )
-        setLoanApplications(loan_apps)
-        setDisplayMessage(data.message)
-
-        setTimeout(() => {
-          setDisplayMessage("")
-        }, 2000);
-      })
-  })
 
   return (
     <>
     {/* <Header/> */}
     <Hero>
       <div>
-        <h2>Loan Applications</h2>
+        <h2>Loans</h2>
       </div>
       <div>
         <NavLink to={"/customer"}>Back</NavLink>
@@ -91,26 +72,24 @@ function SupervisorLoanApprovalPage({ currentUser }) {
         <tr>
           <TableHeader>Customer Name</TableHeader>
           <TableHeader>Customer Phone</TableHeader>
-          <TableHeader>Business Name</TableHeader>
-          <TableHeader>Business Address</TableHeader>
-          <TableHeader>Business History</TableHeader>
-          <TableHeader>Amount</TableHeader>
-          <TableHeader>Interest</TableHeader>
+          <TableHeader>Loan Amount</TableHeader>
+          <TableHeader>Interest Rate(%)</TableHeader>
+          <TableHeader>Approved By</TableHeader>
         </tr>
       </thead>
       <tbody>
-        {loanApplications.map((loanApplication) => (
-          <TableRow key={loanApplication.id}>
-            <TableData>{loanApplication.customer_name}</TableData>
-            <TableData>{loanApplication.customer_phone}</TableData>
-            <TableData>{loanApplication.business_name}</TableData>
-            <TableData>{loanApplication.business_address}</TableData>
-            <TableData>{loanApplication.business_history}</TableData>
-            <TableData>{loanApplication.loan_amount}</TableData>
-            <TableData>{loanApplication.interest_rate}</TableData>
+        {loans.map((loan) => (
+          <TableRow key={loan.id}>
+            <TableData>{loan.loan_application.customer_name}</TableData>
+            <TableData>{loan.loan_application.customer_phone}</TableData>
+            <TableData>{loan.loan_amount}</TableData>
+            <TableData>{loan.interest_rate}</TableData>
+            <TableData>{loan.approved_by}</TableData>
+
             <BtnDiv>
-              <BsCheck onClick={ () => handleApprove(loanApplication)} size={'1.6em'} color="#00e676" cursor="pointer" />
-              <RxCross2 onClick={ () => handleRejected(loanApplication)} size={'1.5em'} color="#ff1744" cursor="pointer" />
+              <Button onClick={ () => handleDisburse(loan)} >Disburse</Button>
+              {/* <BsCheck  size={'1.6em'} color="#00e676" cursor="pointer" /> */}
+              {/* <RxCross2 onClick={ () => handleRejected(loan)} size={'1.5em'} color="#ff1744" cursor="pointer" /> */}
             </BtnDiv>
             {/* <TableData>{loanApplication.field_credit_officer_id}</TableData> */}
           </TableRow>
@@ -224,4 +203,4 @@ const Button = styled.button`
   }
 `;
 
-export default SupervisorLoanApprovalPage;
+export default DisburseLoansPage;

@@ -5,7 +5,7 @@ class LoansController < ApplicationController
 
   # GET /loans
   def index
-    loans = Loan.all
+    loans = Loan.where(status: :pending)
     render json: loans, status: :ok
   end
 
@@ -19,6 +19,18 @@ class LoansController < ApplicationController
     else
       render json: { errors: new_loan.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  # PUT /loans
+  def update
+    loan = Loan.find(params[:id])
+
+    if loan.update(loan_params)
+      render json: { message: "Loan Disbursed" }, status: :ok
+    else
+      render json: { errors: loan.errors.full_messages }, status: :unprocessable_entity
+    end
+
   end
 
 

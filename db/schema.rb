@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_08_090625) do
+ActiveRecord::Schema.define(version: 2023_03_08_111612) do
 
   create_table "loan_applications", force: :cascade do |t|
     t.string "customer_name"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2023_03_08_090625) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "loan_application_id"
+    t.integer "status"
     t.index ["loan_application_id"], name: "index_loans_on_loan_application_id"
   end
 

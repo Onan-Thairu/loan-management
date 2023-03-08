@@ -22,18 +22,9 @@ class LoanDisbursementsController < ApplicationController
   end
 
   # PATCH/PUT /loan_disbursements/1
-  def update
-    if @loan_disbursement.update(loan_disbursement_params)
-      render json: @loan_disbursement
-    else
-      render json: @loan_disbursement.errors, status: :unprocessable_entity
-    end
-  end
 
-  # DELETE /loan_disbursements/1
-  def destroy
-    @loan_disbursement.destroy
-  end
+
+
 
   private
 

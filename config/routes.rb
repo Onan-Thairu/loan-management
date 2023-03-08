@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
   resources :receipts, only: [:index]
   resources :loan_disbursements, only: [:index]
-  resources :loans, only: [:index, :create]
+  resources :loans, only: [:index, :create, :update]
   resources :loan_applications, only: [:index, :create, :update]
   resources :users, only: [:index, :create]
 

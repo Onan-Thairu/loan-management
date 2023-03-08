@@ -12,3 +12,6 @@ loanApp2 = LoanApplication.create(customer_name:"Cynthia Gichuki",customer_phone
 loanApp3 = LoanApplication.create(customer_name:"Ian Kamande",customer_phone: "0718562075",business_name: "Kamande Enterprises",business_address: "Karatina",business_history: "3 years", loan_amount: 25000, interest_rate: 3, field_credit_officer_id: 4)
 loanApp4 = LoanApplication.create(customer_name:"Mark Mlango",customer_phone: "0718562075",business_name: "Mlango Builders",business_address: "Embu",business_history: "10 years", loan_amount: 50000, interest_rate: 3, field_credit_officer_id: 4)
 loanApp5 = LoanApplication.create(customer_name:"Royford Wanyoike",customer_phone: "0718562075",business_name: "Svelte Limited",business_address: "Nairobi",business_history: "6 years", loan_amount: 70000, interest_rate: 3, field_credit_officer_id: 4)
+
+Loan.destroy_all
+LoanDisbursement.destroy_all
