@@ -4,16 +4,19 @@ class LoanApplicationsController < ApplicationController
   before_action :require_field_credit_officer, only: [:create]
   before_action :require_supervisor, only: [:pending]
 
+  # GET /loan_applications - for current supervisor
   def index
     loan_apps = LoanApplication.where(field_credit_officer_id: session[:id])
     render json: loan_apps, status: :ok
   end
 
+  # GET /loan_applications/pending - all pending loan applications
   def pending
     loan_app = LoanApplication.where(status: :pending)
     render json: loan_app, status: :ok
   end
 
+  # PUT /loan_applications/:id
   def update
     loan_app = LoanApplication.find(params[:id])
 
@@ -25,6 +28,7 @@ class LoanApplicationsController < ApplicationController
 
   end
 
+  # POST /loan_applications
   def create
     loan_app = LoanApplication.create(loan_applications_params)
     

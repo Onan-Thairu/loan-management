@@ -1,26 +1,23 @@
 class LoanDisbursementsController < ApplicationController
-  before_action :set_loan_disbursement, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :require_office_admin, only: [:index, :create]
 
   # GET /loan_disbursements
   def index
-    @loan_disbursements = LoanDisbursement.all
-
-    render json: @loan_disbursements
+    loan_disbursements = LoanDisbursement.all
+    render json: loan_disbursements, status: :ok
   end
 
-  # GET /loan_disbursements/1
-  def show
-    render json: @loan_disbursement
-  end
 
   # POST /loan_disbursements
   def create
-    @loan_disbursement = LoanDisbursement.new(loan_disbursement_params)
+    loan_disbursement = LoanDisbursement.create(loan_disbursement_params)
 
-    if @loan_disbursement.save
-      render json: @loan_disbursement, status: :created, location: @loan_disbursement
+    if loan_disbursement.valid?
+      loan_disbursement.save
+      render json: loan_disbursement, status: :created
     else
-      render json: @loan_disbursement.errors, status: :unprocessable_entity
+      render json: { errors: loan_disbursement.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -39,13 +36,15 @@ class LoanDisbursementsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_loan_disbursement
-      @loan_disbursement = LoanDisbursement.find(params[:id])
+
+    def require_office_admin
+      unless current_user && current_user.office_admin?
+        render json: { error: "Access denied" }, status: :forbidden
+      end
     end
 
     # Only allow a list of trusted parameters through.
     def loan_disbursement_params
-      params.require(:loan_disbursement).permit(:loan_id, :disbursement_date, :disbursement_amount)
+      params.permit(:loan_id, :disbursement_date, :disbursement_amount)
     end
 end

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import { Link } from "react-router-dom";
 
 function CreditOfficerLoanApplications() {

@@ -1,13 +1,15 @@
 class LoansController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :require_supervisor, only: [:create, :reject_loan]
+  before_action :require_supervisor, only: [:create]
 
+  # GET /loans
   def index
     loans = Loan.all
     render json: loans, status: :ok
   end
 
+  # POST /loans
   def create
     new_loan = Loan.create(loan_params)
 
@@ -19,9 +21,6 @@ class LoansController < ApplicationController
     end
   end
 
-  def reject_loan
-    # code to reject loan
-  end
 
   private
 
