@@ -7,7 +7,7 @@ function Register() {
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [errors, setErrors] = useState([])
+  // const [errors, setErrors] = useState([])
 
   let navigate = useNavigate()
 
@@ -27,7 +27,7 @@ function Register() {
         navigate('/login')
       } else {
         res.json().then((errorData) => {
-          setErrors(errorData.errors)
+          console.log(errorData.errors)
         })
       }
     })

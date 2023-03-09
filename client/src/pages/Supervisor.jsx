@@ -204,24 +204,4 @@ const BtnDiv = styled.div`
   padding: 0.75rem;
 `
 
-const Button = styled.button`
-  padding: 5px 9px;
-  font-size: 7px;
-  font-weight: bold;
-  border-radius: 5px;
-  background-color: #004c3f;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    background-color: #007f6e;
-  }
-
-  @media (min-width: 768px) {
-    font-size: .4rem;
-    padding: 6px 10px;
-    border-radius: 6px;
-  }
-`;
-
 export default SupervisorLoanApprovalPage;

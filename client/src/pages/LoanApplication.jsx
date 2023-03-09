@@ -11,7 +11,7 @@ function LoanApplicationForm({ currentUser }) {
   const [business_history, setBusinessHistory] = useState("")
   const [loan_amount, setLoanAmount] = useState("")
   
-  const [errors, setErrors] = useState([])
+  // const [errors, setErrors] = useState([])
 
   let navigate = useNavigate()
 
@@ -39,7 +39,7 @@ function LoanApplicationForm({ currentUser }) {
         navigate('/customer')
       } else {
         res.json().then((errorData) => {
-          setErrors(errorData.errors)
+          console.log(errorData.errors)
         })
       }
     })

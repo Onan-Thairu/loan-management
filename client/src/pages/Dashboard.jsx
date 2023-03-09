@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 
@@ -12,17 +11,22 @@ function AdminDashboard() {
     fetch(`/users`)
       .then(res => res.json())
       .then(data => setTotalUsers(data))
+      .catch(error => console.log(error))
 
     fetch(`/loan_disbursements`)
       .then(res => res.json())
       .then(data => setTotalLoansDisbursed(data))
+      .catch(error => console.log(error))
 
     fetch(`/loan_applications/all`)
       .then(res => res.json())
       .then(data => {
-        setTotalLoanApplications(parseInt(data.count))
+        setTotalLoanApplications(data.count)
       })
-  })
+      .catch(error => console.log(error))
+
+  }, [])
+
   return (
     <>
     <Header></Header>
@@ -39,15 +43,19 @@ function AdminDashboard() {
           </CardContent>
         </Card>
         <Card>
-          <CardTitle>Active Loans</CardTitle>
+          <CardTitle>Total Amount Disbursed</CardTitle>
           <CardContent>
-            { totalLoansDisbursed ? totalLoansDisbursed.length : 0 }
+            { totalLoansDisbursed ? 
+                `Ksh.${totalLoansDisbursed.reduce((prev, current) => prev + current.disbursement_amount, 0)}`
+             : 
+                0 
+             }
           </CardContent>
         </Card>
         <Card>
           <CardTitle>Total Loan Applications</CardTitle>
           <CardContent>
-            { totalLoanApplications ? totalLoanApplications.length : 0 }
+            { totalLoanApplications ? totalLoanApplications : 0 }
           </CardContent>
         </Card>
         {/* <Card>

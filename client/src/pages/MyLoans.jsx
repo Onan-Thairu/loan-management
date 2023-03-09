@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function MyLoans() {
-  const [myLoans, setMyLoans] = useState([]);
+  const [disbursedLoans, setDisbursedLoans] = useState([]);
 
   useEffect(() => {
-    fetch("/myloans")
+    fetch("/loan_disbursements")
       .then((res) => res.json())
-      .then((data) => setMyLoans(data));
+      .then((data) => setDisbursedLoans(data));
   }, []);
 
   return (
@@ -41,6 +41,9 @@ function MyLoans() {
             <TableData>{disbursedLoan.loan.interest_rate}</TableData>
             <TableData>{disbursedLoan.loan.approved_by}</TableData>
             <TableData>{disbursedLoan.due_date}</TableData>
+            <BtnDiv>
+              <Button>Make Payment</Button>
+            </BtnDiv>
           </TableRow>
         ))}
       </tbody>
@@ -109,4 +112,31 @@ const TableData = styled.td`
   border-bottom: 1px solid #ddd;
 `;
 
-export default Disbursed;
+const BtnDiv = styled.div`
+  display: flex;
+  text-align: center;
+  gap: .5rem;
+  padding: 0.75rem;
+`
+
+const Button = styled.button`
+  padding: 5px 9px;
+  font-size: 8px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #004c3f;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: #007f6e;
+  }
+
+  @media (min-width: 768px) {
+    font-size: .6rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+`;
+
+export default MyLoans;

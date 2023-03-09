@@ -8,13 +8,13 @@ const CustomerPage = ({ currentUser }) => {
     <>
       <Header></Header>
       <Container>
-      <WelcomeMessage>Welcome back, { currentUser.username }!</WelcomeMessage>
+      <WelcomeMessage>Welcome back, { currentUser? currentUser.username : null }!</WelcomeMessage>
       <Navigation>
         <RoleNavigation>
           <RoleLinks>
             
-            {currentUser.user_role === "loan_applicant" ? <NavLink to="#">My Loans</NavLink> : null }
-            {currentUser.user_role === "loan_applicant" ? <NavLink to="#">Make Payment</NavLink> : null }
+            {currentUser.user_role === "loan_applicant" ? <NavLink to="/myloans">My Loans</NavLink> : null }
+            {/* {currentUser.user_role === "loan_applicant" ? <NavLink to="#">Make Payment</NavLink> : null } */}
 
             {currentUser.user_role === "field_credit_officer" ? <NavLink to="/credit-officer-loans">Loan Applications</NavLink> : null }
             {currentUser.user_role === "field_credit_officer" ? <NavLink to="/apply">Create Loan Application</NavLink> : null }

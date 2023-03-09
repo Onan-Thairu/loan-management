@@ -1,6 +1,6 @@
 class LoanDisbursementsController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_office_admin, only: [:index, :create]
+  before_action :require_office_admin, only: [ :create]
 
   # GET /loan_disbursements
   def index

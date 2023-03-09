@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-// import Header from "../components/Header";
 import { Link } from "react-router-dom";
-import { BsCheck } from "react-icons/bs"
-// import { RxCross2 } from "react-icons/rx"
 
 function DisburseLoansPage({ currentUser }) {
   const [ loans, setLoans ] = useState([]);
@@ -201,7 +198,7 @@ const Button = styled.button`
   }
 
   @media (min-width: 768px) {
-    font-size: .4rem;
+    font-size: .6rem;
     padding: 6px 10px;
     border-radius: 6px;
   }
