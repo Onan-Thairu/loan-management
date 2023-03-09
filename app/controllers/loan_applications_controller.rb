@@ -10,6 +10,12 @@ class LoanApplicationsController < ApplicationController
     render json: loan_apps, status: :ok
   end
 
+  def all
+    loan_apps = LoanApplication.all
+    count = loan_apps.count
+    render json: { count: count }, status: :ok
+  end
+
   # GET /loan_applications/pending - all pending loan applications
   def pending
     loan_app = LoanApplication.where(status: :pending)

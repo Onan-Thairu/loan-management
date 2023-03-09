@@ -23,6 +23,8 @@ const CustomerPage = ({ currentUser }) => {
 
             {currentUser.user_role === "office_admin" ? <NavLink to="/disbursed_loans">Disbursed Loans</NavLink> : null }
             {currentUser.user_role === "office_admin" ? <NavLink to="/loan_disbursements">Disburse Approved Loans</NavLink> : null }
+            {currentUser.user_role === "office_admin" ? <NavLink to="/admin-dashboard">Admin Dashboard</NavLink> : null }
+
 
           </RoleLinks>
         </RoleNavigation>

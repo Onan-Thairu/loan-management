@@ -7,7 +7,7 @@ function Header() {
       <Nav>
         <Logo>Loan Management</Logo>
         <Links>
-          <NavLink to={"#"}>Payments</NavLink>
+          {/* <NavLink to={"#"}>Payments</NavLink> */}
           <NavLink to={"/logout"}>Logout</NavLink>
         </Links>
       </Nav>
