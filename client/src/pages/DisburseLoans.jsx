@@ -9,7 +9,10 @@ function DisburseLoansPage({ currentUser }) {
   useEffect(() => {
     fetch("/loans")
       .then((res) => res.json())
-      .then((data) => setLoans(data));
+      .then((data) => {
+        console.log(data)
+        setLoans(data)
+      });
   }, []);
 
   const handleDisburse = (disbursedLoan => {
@@ -76,6 +79,8 @@ function DisburseLoansPage({ currentUser }) {
           <TableHeader>Loan Amount</TableHeader>
           <TableHeader>Interest Rate(%)</TableHeader>
           <TableHeader>Approved By</TableHeader>
+          {/* <TableHeader>LoanApp ID</TableHeader> */}
+
         </tr>
       </thead>
       <tbody>
@@ -86,6 +91,8 @@ function DisburseLoansPage({ currentUser }) {
             <TableData>{loan.loan_amount}</TableData>
             <TableData>{loan.interest_rate}</TableData>
             <TableData>{loan.approved_by}</TableData>
+            {/* <TableData>{loan.loan_application.id}</TableData> */}
+
 
             <BtnDiv>
               <Button onClick={ () => handleDisburse(loan)} >Disburse</Button>

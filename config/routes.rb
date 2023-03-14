@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   
   get 'sessions/create'
   get 'sessions/destroy'
-  resources :receipts, only: [:index]
-  resources :loan_disbursements, only: [:index, :create]
+  resources :receipts, only: [:index, :create]
+  resources :loan_disbursements, only: [:index, :create, :show]
   resources :loans, only: [:index, :create, :update]
   resources :loan_applications, only: [:index, :create, :update]
   resources :users, only: [:index, :create]

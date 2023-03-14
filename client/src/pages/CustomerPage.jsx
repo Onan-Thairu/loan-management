@@ -14,7 +14,7 @@ const CustomerPage = ({ currentUser }) => {
           <RoleLinks>
             
             {currentUser.user_role === "loan_applicant" ? <NavLink to="/myloans">My Loans</NavLink> : null }
-            {/* {currentUser.user_role === "loan_applicant" ? <NavLink to="#">Make Payment</NavLink> : null } */}
+            {currentUser.user_role === "loan_applicant" ? <NavLink to="/payment">Make Payment</NavLink> : null }
 
             {currentUser.user_role === "field_credit_officer" ? <NavLink to="/credit-officer-loans">Loan Applications</NavLink> : null }
             {currentUser.user_role === "field_credit_officer" ? <NavLink to="/apply">Create Loan Application</NavLink> : null }

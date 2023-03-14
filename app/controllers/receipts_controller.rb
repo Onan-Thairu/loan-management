@@ -8,13 +8,15 @@ class ReceiptsController < ApplicationController
 
 
   # POST /receipts
-  def create
-    @receipt = Receipt.new(receipt_params)
 
-    if @receipt.save
-      render json: @receipt, status: :created, location: @receipt
+  def create
+    new_receipt = Receipt.create(receipt_params)
+
+    if new_receipt.valid?
+      new_receipt.save
+      render json: new_receipt, status: :created
     else
-      render json: @receipt.errors, status: :unprocessable_entity
+      render json: { errors: new_receipt.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -22,6 +24,6 @@ class ReceiptsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def receipt_params
-      params.require(:receipt).permit(:loan_app_id, :receipt_date, :receipt_amount)
+      params.permit(:loan_app_id, :receipt_date, :receipt_amount)
     end
 end

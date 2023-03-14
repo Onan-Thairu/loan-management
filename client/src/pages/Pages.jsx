@@ -9,6 +9,7 @@ import SupervisorLoanApprovalPage from "./Supervisor"
 import DisburseLoansPage from "./DisburseLoans"
 import Disbursed from "./Disbursed"
 import MyLoans from "./MyLoans"
+import Payment from "./Payment"
 import AdminDashboard from "./Dashboard"
 import Logout from "./Logout"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
@@ -39,6 +40,7 @@ function Pages() {
         <Route path="/loan_disbursements" element={ <DisburseLoansPage currentUser={ currentUser } />}></Route>
         <Route path="/disbursed_loans" element={ <Disbursed />}></Route>
         <Route path="/myloans" element={ <MyLoans />}></Route>
+        <Route path="/payment" element={ <Payment />}></Route>
 
         <Route path="/admin-dashboard" element={ <AdminDashboard />}></Route>
 

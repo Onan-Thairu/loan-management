@@ -8,6 +8,12 @@ class LoanDisbursementsController < ApplicationController
     render json: loan_disbursements, status: :ok
   end
 
+  # Get /loan_disbursement/:id
+  def show
+    loan_disbursement = LoanDisbursement.find(params[:id])
+    render json: loan_disbursement, status: :ok
+  end
+
 
   # POST /loan_disbursements
   def create

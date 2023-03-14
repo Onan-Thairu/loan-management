@@ -29,7 +29,8 @@ function MyLoans() {
           <TableHeader>Disbursement Date</TableHeader>
           <TableHeader>Disbursement Amount</TableHeader>
           <TableHeader>Interest Rate(%)</TableHeader>
-          <TableHeader>Approved By</TableHeader>
+          {/* <TableHeader>Approved By</TableHeader> */}
+          <TableHeader>Amount Payable</TableHeader>
           <TableHeader>Due Date</TableHeader>
         </tr>
       </thead>
@@ -39,11 +40,16 @@ function MyLoans() {
             <TableData>{disbursedLoan.disbursement_date}</TableData>
             <TableData>{disbursedLoan.disbursement_amount}</TableData>
             <TableData>{disbursedLoan.loan.interest_rate}</TableData>
-            <TableData>{disbursedLoan.loan.approved_by}</TableData>
+            {/* <TableData>{disbursedLoan.loan.approved_by}</TableData> */}
+            <TableData>
+              {
+                disbursedLoan.disbursement_amount + (disbursedLoan.disbursement_amount * 0.06 )
+              }
+            </TableData>
             <TableData>{disbursedLoan.due_date}</TableData>
-            <BtnDiv>
+            {/* <BtnDiv>
               <Button>Make Payment</Button>
-            </BtnDiv>
+            </BtnDiv> */}
           </TableRow>
         ))}
       </tbody>
