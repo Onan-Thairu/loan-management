@@ -24,6 +24,6 @@ class ReceiptsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def receipt_params
-      params.permit(:loan_app_id, :receipt_date, :receipt_amount)
+      params.permit(:loan_application_id, :receipt_date, :receipt_amount)
     end
 end

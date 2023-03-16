@@ -1,3 +1,3 @@
 class Receipt < ApplicationRecord
-  belongs_to :loan_app
+  belongs_to :loan_application
 end
